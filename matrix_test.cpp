@@ -134,10 +134,9 @@ void unit_tests(){
     int a[] = {3, 2, 3, 4, 4, 4, 3, 2, 1, 4, 4, 3, 2, 3, 1, 1};
     mm::Matrix<int> m(4, 4, a, a + (sizeof(a) / sizeof(*a)));
     m.dump(std::cout);
-    const int determinant = 45;
     const int result = m.BareissDeterminant();
     std::cout << "Determinant :" << result << '\n';
-    assert (determinant == result);
+    assert (45 == result);
   }
   {
     dd::Say say("Random method test");

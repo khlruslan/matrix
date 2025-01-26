@@ -5,6 +5,8 @@
 #include <iterator>
 #include <utility>
 #include <random>
+#include <stdexcept>
+
 
 namespace mm{
 
@@ -97,6 +99,9 @@ namespace mm{
       std::cerr << "Matrix::" << __func__ <<" iterators start fin \n";
 #endif
       assert(cols * rows == std::distance(start, fin) );
+      if (cols * rows != std::distance(start, fin) ){
+        throw std::invalid_argument("Iterators distamce dot equal Matrix capacity.");
+      }
       for (int i = 0; i < rows ; ++i){
         for (int j = 0; j < cols ; ++j){
           data_[i][j] = *start;
@@ -217,7 +222,7 @@ namespace mm{
     }
 
   template <class T>
-    void Matrix<T>::free_data(int cols, int rows, T** data){
+    void Matrix<T>::free_data(int , int rows, T** data){
       if (nullptr == data){
         return;
       } 
@@ -360,7 +365,6 @@ namespace mm{
       }
       if (cols > 1){
         // mix first line
-        int multiply = distrib(gen);
         for (int j = 0 ; j < cols ; ++j){
           result.data_[0][j] = result.data_[0][j] +  result.data_[1][j];
         }
