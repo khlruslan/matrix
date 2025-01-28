@@ -136,19 +136,19 @@ namespace my {
         EXPECT_EQ(m3.equal(m2), false);
       }
 
-      TEST(MatrixInt, BareisDeterminant4x4) {
+      TEST(MatrixInt, BareissDeterminant4x4) {
         std::vector<int> a = {3, 2, 3, 4, 4, 4, 3, 2, 1, 4, 4, 3, 2, 3, 1, 1};
         mm::Matrix<int> m(4, 4, a.begin(), a.end());
         EXPECT_EQ(45, m.BareissDeterminant());
       }
 
-      TEST(MatrixInt, BareisDeterminant100x100Random) {
+      TEST(MatrixInt, BareissDeterminant100x100Random) {
         const int determinant = 42;
         auto m = mm::Matrix<int>::random(100, determinant, 1 , 2 * determinant );
         EXPECT_EQ(determinant, m.BareissDeterminant());
       }
 
-      TEST(MatrixInt, BareisDeterminant1000x1000Random) {
+      TEST(MatrixInt, BareissDeterminant1000x1000Random) {
         const int determinant = 421;
         auto m = mm::Matrix<int>::random(1000, determinant, 1 , 2 * determinant );
         EXPECT_EQ(determinant, m.BareissDeterminant());
