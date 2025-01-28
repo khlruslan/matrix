@@ -6,6 +6,7 @@
 #include <utility>
 #include <random>
 #include <stdexcept>
+#include <cassert>
 
 
 namespace mm{
@@ -82,6 +83,7 @@ namespace mm{
       public:
       // Мы бы хотели использовать m[x][y]
       ProxyRow operator[](int);
+      const ProxyRow operator[](int) const;
     };
 
   template <class T>
@@ -374,6 +376,12 @@ namespace mm{
   // Мы бы хотели использовать m[x][y]
   template <class T>
     typename  Matrix<T>::ProxyRow Matrix<T>::operator[](int row){
+      return {data_[row]};
+    }
+
+  // Мы бы хотели использовать m[x][y]
+  template <class T>
+    const typename Matrix<T>::ProxyRow Matrix<T>::operator[](int row) const{
       return {data_[row]};
     }
 
