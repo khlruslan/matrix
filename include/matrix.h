@@ -100,13 +100,20 @@ namespace mm{
 #ifdef my_debug
       std::cerr << "Matrix::" << __func__ <<" iterators start fin \n";
 #endif
+<<<<<<< HEAD
       assert(cols * rows == std::distance(start, fin) );
       if (cols * rows != std::distance(start, fin) ){
           free_data(*this);
         throw std::invalid_argument("Iterators distamce dot equal Matrix capacity.");
       }
+=======
+>>>>>>> 88b31a6 (1. Added exception throw from Matrix<T>::Matrix(int cols, int rows, It start, It fin))
       for (int i = 0; i < rows ; ++i){
         for (int j = 0; j < cols ; ++j){
+          if (start == fin){
+            free_data(*this);
+            throw std::invalid_argument("Iterators range less than required Matrix capacity.");
+          }
           data_[i][j] = *start;
           ++start;
         }

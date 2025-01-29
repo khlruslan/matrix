@@ -42,6 +42,34 @@ namespace my {
         EXPECT_EQ(result, a);
       }
 
+      TEST(MatrixInt, ConstructorIteratorExceptionTest) {
+        std::vector<int> a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        try{
+          const mm::Matrix<int> m(3, 4, a.begin(), a.end());
+          FAIL();
+        } catch (std::invalid_argument& ex){
+          EXPECT_STREQ(ex.what(), "Iterators range less than required Matrix capacity.");
+        } catch(...){
+          FAIL();
+        }
+      }
+      
+      TEST(MatrixInt, ConstructorIteratorNoExceptionTest) {
+        std::vector<int> a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        try{
+          const mm::Matrix<int> m(3, 4, a.begin(), a.end());
+          EXPECT_EQ(m.nrows(), 4);
+          EXPECT_EQ(m.ncols(), 3);
+          EXPECT_EQ(m[1][0], 4);
+          EXPECT_EQ(m[3][0], 10);
+          auto result = GetVectorFromMatrix(m);
+          a.pop_back();
+          EXPECT_EQ(result, a);
+        } catch(...){
+          FAIL();
+        }
+      }
+
       TEST(MatrixInt, Eye) {
         std::vector<int> a = {1, 0, 0, 0, 1, 0, 0, 0, 1};
         auto m =  mm::Matrix<int>::eye(3, 3, 1);
@@ -121,8 +149,17 @@ namespace my {
         EXPECT_EQ(m.nrows(), 3);
         EXPECT_EQ(m.ncols(), 4);
       }
-
+      
       TEST(MatrixInt, Trace) {
+        std::vector<int> a = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        mm::Matrix<int> m(3, 3, a.begin(), a.end());
+        EXPECT_EQ(m.trace(), 15);
+
+        mm::Matrix<int> m2(10, 10, 5);
+        EXPECT_EQ(m2.trace(), 50);
+      }
+
+      TEST(MatrixInt, Equal) {
         std::vector<int> a = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         std::vector<int> b = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         mm::Matrix<int> m(3, 3, a.begin(), a.end());
@@ -134,6 +171,25 @@ namespace my {
         EXPECT_EQ(m3.equal(m), false);
         EXPECT_EQ(m2.equal(m3), false);
         EXPECT_EQ(m3.equal(m2), false);
+      }
+
+      TEST(MatrixInt, Transponse) {
+        std::vector<int> a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        std::vector<int> b = {1, 4, 7, 10, 2, 5, 8, 11, 3, 6, 9, 12};
+        mm::Matrix<int> m(3, 4, a.begin(), a.end());
+        m.transpose();
+
+        auto result = GetVectorFromMatrix(m);
+        EXPECT_EQ(result, b);
+        EXPECT_EQ(m.nrows(), 3);
+        EXPECT_EQ(m.ncols(), 4);
+      }
+
+      TEST(MatrixInt, Less) {
+        mm::Matrix<int> m(10, 10, 1);
+        mm::Matrix<int> m2(10, 10, 2);
+        EXPECT_EQ(m.less(m2), true);
+        EXPECT_EQ(m2.less(m), false);
       }
 
       TEST(MatrixInt, BareissDeterminant4x4) {
