@@ -102,6 +102,7 @@ namespace mm{
 #endif
       assert(cols * rows == std::distance(start, fin) );
       if (cols * rows != std::distance(start, fin) ){
+          free_data(*this);
         throw std::invalid_argument("Iterators distamce dot equal Matrix capacity.");
       }
       for (int i = 0; i < rows ; ++i){
