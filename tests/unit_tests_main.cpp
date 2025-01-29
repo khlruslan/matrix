@@ -54,6 +54,18 @@ namespace my {
         }
       }
       
+      TEST(MatrixInt, ConstructorIstreamIteratorExceptionTest) {
+        std::istringstream str ("1 2 3 4 5 6 7 8 9 10 11");
+        try{
+          const mm::Matrix<int> m(3, 4, std::istream_iterator<int>(str), std::istream_iterator<int>());
+          FAIL();
+        } catch (std::invalid_argument& ex){
+          EXPECT_STREQ(ex.what(), "Iterators range less than required Matrix capacity.");
+        } catch(...){
+          FAIL();
+        }
+      }
+
       TEST(MatrixInt, ConstructorIteratorNoExceptionTest) {
         std::vector<int> a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         try{
@@ -64,6 +76,22 @@ namespace my {
           EXPECT_EQ(m[3][0], 10);
           auto result = GetVectorFromMatrix(m);
           a.pop_back();
+          EXPECT_EQ(result, a);
+        } catch(...){
+          FAIL();
+        }
+      }
+
+      TEST(MatrixInt, ConstructorIstreamIteratorNoExceptionTest) {
+        std::istringstream str ("1 2 3 4 5 6 7 8 9 10 11 12 13");
+        try{
+          const mm::Matrix<int> m(3, 4, std::istream_iterator<int>(str), std::istream_iterator<int>());
+          EXPECT_EQ(m.nrows(), 4);
+          EXPECT_EQ(m.ncols(), 3);
+          EXPECT_EQ(m[1][0], 4);
+          EXPECT_EQ(m[3][0], 10);
+          auto result = GetVectorFromMatrix(m);
+          std::vector<int> a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
           EXPECT_EQ(result, a);
         } catch(...){
           FAIL();
