@@ -5,22 +5,17 @@ C++ Matrix template
 - Random matrix with known determinant value creation
 - Cmake project with gtest framework support
 
-HOW TO BIULD
-
+### HOW TO BIULD
 mkdir build
 cd build
 cmake ..
 cmake --build .
 
-
-HOW TO RUN
-
+### HOW TO RUN
 From build directory :
 ./matrix_test
 
-
-HOW TO RUN UTIT TESTS
-
+### HOW TO RUN UTIT TESTS
 From build directory :
 ./tests/unit_tests
 
