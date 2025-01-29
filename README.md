@@ -6,16 +6,18 @@ C++ Matrix template
 - Cmake project with gtest framework support
 
 ### HOW TO BIULD
-mkdir build
-cd build
-cmake ..
-cmake --build .
+<p>
+    mkdir build <br> 
+    cd build <br>
+    cmake .. <br>
+    cmake --build . <br> 
+</p>
 
 ### HOW TO RUN
-From build directory :
-./matrix_test
+<p>From build directory :<br>
+./matrix_test</p>
 
 ### HOW TO RUN UTIT TESTS
-From build directory :
-./tests/unit_tests
+<p>From build directory :<br>
+./tests/unit_tests</p>
 
