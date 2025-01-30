@@ -12,6 +12,12 @@ else()
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# Add sanitizer flags for C++ compiler for "Debug" configuration
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address,undefined")
+
+#add_compile_options(-fsanitize=address)
+#add_link_options(-fsanitize=address)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

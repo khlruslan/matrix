@@ -7,7 +7,7 @@
 
 int random_test(){
   const int determinant = 42;
-  auto m = mm::Matrix<int>::random(1000, determinant, 1 , 1000 * determinant );
+  auto m = mm::Matrix<int>::random(1000, determinant, 1 , 2 * determinant );
   const int result = m.BareissDeterminant();
   std::cout << "Determinant :" << result << '\n';
   if (result == determinant){

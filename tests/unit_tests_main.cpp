@@ -233,7 +233,7 @@ namespace my {
       }
 
       TEST(MatrixInt, BareissDeterminant1000x1000Random) {
-        const int determinant = 421;
+        const int determinant = 42;
         auto m = mm::Matrix<int>::random(1000, determinant, 1 , 2 * determinant );
         EXPECT_EQ(determinant, m.BareissDeterminant());
       }
